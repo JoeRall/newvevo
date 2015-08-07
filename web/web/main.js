@@ -206,23 +206,23 @@ var togglePlayPause = function (displayOnly) {
     }
 }
 
-var addToWatchHistory = function () {
-    var videoIndex = currentIndex - 1;
-    var div = document.createElement('div');
-    var spanTitle = document.createElement('span');
-    var spanArtist = document.createElement('span');
-    var link = document.createElement('a');
-    link.href = "http://www.vevo.com/watch/" + randomVideos[videoIndex].Isrc;
-    link.target = "_blank";
-    spanTitle.innerHTML = randomVideos[videoIndex].Title;
-    spanTitle.class = "title-item";
-    spanArtist.innerHTML = "by " + randomVideos[videoIndex].Artist;
-    spanArtist.class = "artist-item";
-    link.appendChild(spanTitle);
-    link.appendChild(spanArtist);
-    div.appendChild(link);
-    var history = document.getElementById('history');
-    history.insertBefore(div, history.childNodes[2]);
+var addToWatchHistory = function() {
+  var videoIndex = currentIndex - 1;
+  var div = document.createElement('div');
+  var spanTitle = document.createElement('span');
+  var spanArtist = document.createElement('span');
+  var link = document.createElement('a');
+  link.href = "http://www.vevo.com/watch/" + randomVideos[videoIndex].Isrc + "?utm_source=vevo_roulette&utm_medium=history&utm_campaign=beta";
+  link.target = "_blank";
+  spanTitle.innerHTML = randomVideos[videoIndex].Title;
+  spanTitle.class = "title-item";
+  spanArtist.innerHTML = "by " + randomVideos[videoIndex].Artist;
+  spanArtist.class = "artist-item";
+  link.appendChild(spanTitle);
+  link.appendChild(spanArtist);
+  div.appendChild(link);
+  var history = document.getElementById('history');
+  history.insertBefore(div, history.childNodes[2]);
 }
 
 var coachMarksDiv = function () {
