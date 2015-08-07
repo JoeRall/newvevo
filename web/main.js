@@ -1,10 +1,39 @@
 var token = "_TMw_fGgJHvzr84MqwK1eWhBgbdebZhAm_y3W1ou-sU1.1439085600.xrqkd87wbBX66Jh0rdWF_bDvOl6CfmhH_vc1-THLJjnmOfVeGM1dK14xiHsiZTSP7-jakA2";
 
-// set up initial xhr
+// set up xhr and reusable request function
 var ajax = function() {
   return new XMLHttpRequest();
 }
 
+var makeRequest = function(readyStateCallback, type, url, data) {
+  var request = ajax();
+  request.onreadystatechange = function() {
+    if (request.readyState === 4) {
+      readyStateCallback(request);
+    }
+  }
+
+  request.open(type, url, true);
+  if (type === "post") {
+    request.setRequestHeader('Content-type', 'application/json');
+  }
+  request.send(data);
+}
+
+// utils
+// parse seconds into timecode that server can ingest
+var getTimeCode = function(seconds) {
+  var sec_num = parseInt(seconds, 10); // don't forget the second param
+  var hours   = Math.floor(sec_num / 3600);
+  var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+  var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+  if (hours   < 10) {hours   = "0"+hours;}
+  if (minutes < 10) {minutes = "0"+minutes;}
+  if (seconds < 10) {seconds = "0"+seconds;}
+  var time    = hours+':'+minutes+':'+seconds;
+  return time;
+}
 
 // get dom elements
 var video = document.getElementById('video');
@@ -21,47 +50,32 @@ var currentIndex = 0;
 var currentUser = "";
 
 var getMoreVideos = function(username) {
-  var request = ajax();
-  request.onreadystatechange = function() {
+  cb = function(request) {
     if (request.readyState === 4) {
-      console.log("response", JSON.parse(request.response));
       randomVideos = randomVideos.concat(JSON.parse(request.response));
       getNextVideo();
     }
   }
 
-  request.open("get", "http://newvevo.azurewebsites.net/api/newvevo/Next?userId=" + username, true);
-  request.send(null);
+  makeRequest(cb, "get", "http://newvevo.azurewebsites.net/api/newvevo/Next?userId=" + username);
 }
 
 var getNextVideo = function(startPlay) {
-  var request = ajax();
-  request.onreadystatechange = function() {
-    if (request.readyState === 4) {
-      console.log(request.response);
-      video.src = (JSON.parse(request.response))[0].url;
-      video.load();
-      if (startPlay) {
-        video.play();
-      }
+  cb = function(request) {
+    var response = JSON.parse(request.response);
+    if (response.errors) {
+      console.error("getNextVideo", response.errors);
+      currentIndex++;
+      return getNextVideo(startPlay);
+    }
+    video.src = response[0].url;
+    video.load();
+    if (startPlay) {
+      video.play();
     }
   }
   isrc = randomVideos[currentIndex++].Isrc;
-  request.open("get", "http://apiv2.vevo.com/video/" + isrc + "/streams/mp4?token=" + token, true);
-  request.send(null);
-}
-
-var getTimeCode = function(seconds) {
-  var sec_num = parseInt(seconds, 10); // don't forget the second param
-  var hours   = Math.floor(sec_num / 3600);
-  var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
-  var seconds = sec_num - (hours * 3600) - (minutes * 60);
-
-  if (hours   < 10) {hours   = "0"+hours;}
-  if (minutes < 10) {minutes = "0"+minutes;}
-  if (seconds < 10) {seconds = "0"+seconds;}
-  var time    = hours+':'+minutes+':'+seconds;
-  return time;
+  makeRequest(cb, "get", "http://apiv2.vevo.com/video/" + isrc + "/streams/mp4?token=" + token);
 }
 
 random.addEventListener('click', function (event) {
@@ -70,19 +84,19 @@ random.addEventListener('click', function (event) {
   // check if we need more vidoes
   // if yes make a call to the server
   // randomVideos.concat(getMoreVideos());
-
-  var request = ajax();
-  request.onreadystatechange = function() {
-    if (request.readyState === 4) {
-    }
+  cb = function(request) {
+    console.log(request)
+    // if (response.error) {
+    //   console.error("Mark Watched Failed", response.error);
+    // }
   }
-  request.open("post", "http://newvevo.azurewebsites.net/api/newvevo/MarkWatched", true);
-  request.setRequestHeader('Content-type', 'application/json');
-  request.send(JSON.stringify({
+  data = JSON.stringify({
     userId: currentUser,
     isrc: randomVideos[currentIndex].Isrc,
     duration: getTimeCode(video.currentTime)
-  }));
+  })
+  makeRequest(cb, "post", "http://newvevo.azurewebsites.net/api/newvevo/MarkWatched", data);
+
   getNextVideo(true);
 });
 
