@@ -25,13 +25,18 @@ namespace NewVevo.Entity.Services
 
             for (int i = 0; i < count; i++)
             {
-                var v = videosIHaventSeen.Skip(_r.Next(videosIHaventSeen.Count - 1)).First();
+                var v = videosIHaventSeen.Skip(GetRandomVid(videosIHaventSeen)).First();
 
                 videosIHaventSeen.Remove(v);
                 ran.Add(v);
             }
 
             return ran.ToArray();
+        }
+
+        private static int GetRandomVid(List<Video> videosIHaventSeen)
+        {
+            return _r.Next(videosIHaventSeen.Count - 1);
         }
 
         public Video GetRandomVideo(ApplicationUser user)

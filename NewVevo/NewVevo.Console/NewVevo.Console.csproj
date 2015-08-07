@@ -65,16 +65,12 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="videoDB_1MillionThreshold.csv" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NewVevo.Entity\NewVevo.Entity.csproj">
       <Project>{349e5c6d-652b-439e-9cc8-431f069c2256}</Project>
       <Name>NewVevo.Entity</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="videoDB_1mil_tab.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
