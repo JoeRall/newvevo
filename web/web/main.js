@@ -1,5 +1,6 @@
 //TODO handle getting next video while playback is paused
 // first time click issues
+// change on any button
 
 // TODO: styles
 // don't show video container till streams load
@@ -121,8 +122,13 @@ var trackVideoWatch = function(roulette) {
 
 random.addEventListener('click', function (event) {
   trackVideoWatch();
-  getNextVideo(true);
-  addToWatchHistory();
+  if(hasPlayed) {
+    getNextVideo(true);
+    addToWatchHistory();
+  } else {
+    hasPlayed = true;
+    video.play();
+  }
 });
 
 username.addEventListener('keyup', function(event){

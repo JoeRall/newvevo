@@ -16,10 +16,10 @@ button:focus {
 }
 
 img {
+  margin-right: 10px;
   display: block;
-  margin: 0 auto;
+  float: right;
   position: relative;
-  margin-top: -60px;
 }
 
 span {
@@ -44,15 +44,12 @@ span {
   border: 4px solid black;
 }
 
-.roulette {
-  top
-}
-
 .button-bar {
   padding-bottom: 10px;
   margin-bottom: 10px;
   margin-top: 40px;
   position: relative;
+  text-align: center;
 }
 
 .watch-history {
@@ -129,12 +126,18 @@ span {
   left: 2.24em;
 }
 
-.pause {
+.play, .pause {
   margin-left: 20px;
+  float: left;
+  margin-top: -10px;
 }
 
-.play {
-  margin-left: 20px;
+.random-wrapper {
+  display: inline-block;
+}
+
+.random-wrapper .fa-random {
+  font-size: 3.5em;
 }
 
 .play:before, .play:after {
@@ -206,9 +209,11 @@ button {
   font-size: 40px;
   text-align: center;
   transition: opacity .5s linear;
+  pointer-events: none;
 }
 
 .active {
+  pointer-events: auto;
   opacity: 1;
 }
 
