@@ -246,6 +246,13 @@ input:active, input:focus {
     margin-top: 20px;
   }
 
+    .button-bar i,
+    .button-bar button,
+    .button-bar img
+     {
+        cursor: pointer;
+    }
+
   .video-container {
     height: 478px;
     padding-bottom: 0;
