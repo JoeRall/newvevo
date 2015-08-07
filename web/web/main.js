@@ -120,7 +120,6 @@ var trackVideoWatch = function (roulette) {
 }
 
 random.addEventListener('click', function (event) {
-    trackVideoWatch();
     if (hasPlayed) {
         trackVideoWatch(true);
         getNextVideo(true);
@@ -198,7 +197,7 @@ var togglePlayPause = function (displayOnly) {
         }
     } else {
         classList.remove('fa-pause');
-        classList.add('fa-pause');
+        classList.add('fa-play');
         if (!displayOnly) {
             video.pause();
         }
