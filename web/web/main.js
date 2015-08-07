@@ -173,7 +173,7 @@ video.addEventListener('ended', function (event) {
 
 var hasPlayed = false;
 video.addEventListener('play', function () {
-    if (playPauseBtn.classList.contains('fa-pause')) {
+    if (playPauseBtn.classList.contains('fa-play')) {
         togglePlayPause(true);
     }
 });
