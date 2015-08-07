@@ -1,10 +1,10 @@
 //TODO, handle getting next video while playback is paused
-// Output watch history to page
+// bug where video in list is not watchable
 
 // TODO: styles
-// constrain video to be 16:9
 // don't show video container till streams load
 // hover states on buttons
+// desktop css
 
 
 var token = "_TMw_fGgJHvzr84MqwK1eWhBgbdebZhAm_y3W1ou-sU1.1439085600.xrqkd87wbBX66Jh0rdWF_bDvOl6CfmhH_vc1-THLJjnmOfVeGM1dK14xiHsiZTSP7-jakA2";
@@ -57,11 +57,12 @@ var currentIndex = 0;
 
 // store the user
 var currentUser = "";
+var hasPaused = false;
 
 var getMoreVideos = function(username, doNotGetNextVid) {
   cb = function(request) {
     if (request.readyState === 4) {
-        randomVideos = randomVideos.concat(JSON.parse(request.response));
+        randomVideos = randomVideos.concat(JSON.parse(request.response).Videos);
 
         //-- I know this looks weird
         if (!doNotGetNextVid)
@@ -85,12 +86,12 @@ var getNextVideo = function(startPlay) {
     if (startPlay) {
       video.play();
     }
-
+    currentIndex++;
     if (currentIndex < randomVideos.length - 5) {
         getMoreVideos(currentUser, true);
     }
   }
-  isrc = randomVideos[currentIndex++].Isrc;
+  isrc = randomVideos[currentIndex].Isrc;
   makeRequest(cb, "get", "http://apiv2.vevo.com/video/" + isrc + "/streams/mp4?token=" + token);
 }
 
@@ -106,7 +107,7 @@ var trackVideoWatch = function(roulette) {
     isrc: randomVideos[currentIndex].Isrc,
     duration: getTimeCode(video.currentTime),
     IsRoulette: roulette,
-    HasPressedPaused: false // TODO: hook this up
+    HasPressedPaused: hasPaused
   })
   makeRequest(cb, "post", "http://newvevo.azurewebsites.net/api/newvevo/MarkWatched", data);
 }
@@ -127,10 +128,12 @@ username.addEventListener('keyup', function(event){
   }
 });
 
+// play pause click
 playPauseBtn.addEventListener('click', function (event) {
   togglePlayPause();
 });
 
+// roulette key
 rouletteBtn.addEventListener('click', function(event){
   // video.src = getNextVideo();
   playPauseBtn.classList.add('disable');
@@ -165,6 +168,9 @@ var togglePlayPause = function (displayOnly) {
   if(classList.contains('play')) {
     classList.remove('play');
     classList.add('pause');
+    if(!hasPaused) {
+      hasPaused = true;
+    }
     if(!displayOnly) {
       video.play();
     }
@@ -184,6 +190,7 @@ var addToWatchHistory = function() {
   var spanArtist = document.createElement('span');
   var link = document.createElement('a');
   link.href = "http://www.vevo.com/watch/" + randomVideos[videoIndex].Isrc;
+  link.target = "_blank";
   spanTitle.innerHTML = "Title: " + randomVideos[videoIndex].Title;
   spanTitle.class = "title-item";
   spanArtist.innerHTML = "Artist: " + randomVideos[videoIndex].Artist;
@@ -195,10 +202,39 @@ var addToWatchHistory = function() {
   history.appendChild(div);
 }
 
-var showCoachMarks = function() {
+var coachMarksDiv = function() {
   var div = document.createElement('div');
   div.classList.add("coach-marks");
-  div.innerHTML = "If you choose the Roulette button you will also get a random video, but you can\’t skip it\!"
+  return div;
+}
+
+var showCoachMarks = function() {
+  showRandomCoachMarks();
+  setTimeout(function(){
+    var buttonBar = document.getElementsByClassName('button-bar')[0];
+    buttonBar.removeChild(document.getElementsByClassName('coach-marks')[0]);
+    randomBtn.classList.remove('highlight-btn');
+    showRouletteCoachMarks();
+    setTimeout(function(){
+      var buttonBar = document.getElementsByClassName('button-bar')[0];
+      buttonBar.removeChild(document.getElementsByClassName('coach-marks')[0]);
+      rouletteBtn.classList.remove('highlight');
+    }, 4000);
+  }, 4000);
+}
+
+var showRouletteCoachMarks = function() {
+  div = coachMarksDiv();
+  div.innerHTML = "If you choose the Roulette button you will also get a random video, but you can&rsquo;t skip it!"
   var buttonBar = document.getElementsByClassName('button-bar')[0];
   buttonBar.insertBefore(div, rouletteBtn);
+  rouletteBtn.classList.add('highlight');
+}
+
+var showRandomCoachMarks = function() {
+  div = coachMarksDiv();
+  div.innerHTML = "Click here to see a random music video."
+  var buttonBar = document.getElementsByClassName('button-bar')[0];
+  buttonBar.insertBefore(div, rouletteBtn);
+  randomBtn.classList.add('highlight-btn');
 }

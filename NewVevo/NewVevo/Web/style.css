@@ -1,189 +1,244 @@
 body {
-    background: rgb(42, 192, 218);
-    font-family: sans-serif;
-    margin: 0;
+  background: rgb(42, 192, 218);
+  font-family: sans-serif;
+  margin: 0;
+  color: white;
 }
 
 video {
-    display: block;
-    position: absolute;
+  background-color: black;
+  display: block;
+  position: absolute;
 }
 
 button:focus {
-    outline: none;
+  outline: none;
 }
 
 img {
-    display: block;
-    margin: 0 auto;
-    position: relative;
-    margin-top: -60px;
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  margin-top: -60px;
 }
 
 span {
-    display: block;
+  display: block;
 }
 
 .coach-marks {
-    display: block;
-    position: absolute;
+  display: block;
+  position: absolute;
+  width: 100%;
+  color: white;
+  text-align: center;
+  background-color: #000;
+  padding: 5px;
+  box-sizing: border-box;
+  top: -54px;
+  min-height: 40px;
 }
 
-/*.roulette {
+.highlight {
+  background: black;
+  border: 4px solid black;
+}
+
+.roulette {
   top
-}*/
+}
 
 .button-bar {
-    padding-bottom: 10px;
-    margin-bottom: 10px;
-    margin-top: 40px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  margin-top: 40px;
+  position: relative;
+}
+
+.watch-history {
+  font-size: 24px;
+  text-align: center;
 }
 
 .watch-history div {
-    background-color: rgba(40,80,100,.1);
-    color: white;
-    margin-top: 10px;
-    padding: 10px;
-    height: auto;
-    font-size: 20px;
-    width: 100%;
+  background-color: rgba(40,80,100,.1);
+  color: white;
+  margin-top: 10px;
+  padding: 10px;
+  height: auto;
+  font-size: 20px;
+  width: 100%;
 }
 
-    .watch-history div a {
-        color: white;
-        text-decoration: none;
-    }
+.watch-history div a {
+  color: white;
+  text-decoration: none;
+}
 
 .watch-history span {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 .disable {
-    pointer-events: none;
-    opacity: .5;
+  pointer-events: none;
+  opacity: .5;
 }
 
-.next:before {
-    width: 0;
-    height: 0;
-    top: 1.08em;
-    left: 2.3em;
-    border: 2em solid transparent;
-    border-left-color: rgba(255, 255, 255, 1);
-    border-left-width: 2.5em;
+.next:before{
+  width: 0;
+  height: 0;
+  top: 1.08em;
+  border: 2em solid transparent;
+  border-left-color: rgba(255, 255, 255, 1);
+  border-left-width: 2.5em;
 }
 
 .next:after {
-    display: block;
-    height: 3.76em;
-    width: 1.52em;
-    top: 1.24em;
-    background-color: rgba(255, 255, 255, 1);
-    left: 5.528em;
-    content: " ";
+  display: block;
+  height: 3.76em;
+  width: 1.52em;
+  top: 1.24em;
+  background-color: rgba(255, 255, 255, 1);
+  left: 5.528em;
+  content: " ";
+}
+
+.highlight-btn.next:after {
+  border-left-color: black;
+  background-color: black;
+}
+
+.highlight-btn.next:before {
+  border-left-color: black;
+}
+
+.next:before {
+  left: 2.3em;
 }
 
 .pause:before, .pause:after {
-    height: 3.76em;
-    width: 1.52em;
-    left: 0;
-    top: 1.24em;
-    display: block;
-    background-color: rgba(255, 255, 255, 1);
+  height: 3.76em;
+  width: 1.52em;
+  left: 0;
+  top: 1.24em;
+  display: block;
+  background-color: rgba(255, 255, 255, 1);
 }
 
 .pause:after {
-    left: 2.24em;
+  left: 2.24em;
 }
 
 .pause {
-    margin-left: 20px;
+  margin-left: 20px;
 }
 
 .play {
-    margin-left: 20px;
+  margin-left: 20px;
 }
 
-    .play:before, .play:after {
-        width: 0;
-        height: 0;
-        top: 1.08em;
-        left: 0;
-        border: 2em solid transparent;
-        border-left-color: rgba(255, 255, 255, 1);
-        border-left-width: 3em;
-    }
+.play:before, .play:after {
+  width: 0;
+  height: 0;
+  top: 1.08em;
+  left: 0;
+  border: 2em solid transparent;
+  border-left-color: rgba(255, 255, 255, 1);
+  border-left-width: 3em;
+}
 
 button:before, button:after {
-    position: absolute;
-    content: " ";
+  position: absolute;
+  content: " ";
 }
 
 .next {
-    float: right;
-    margin-right: 20px;
-    left: -5px;
+  float: right;
+  margin-right: 20px;
+  left: -5px;
 }
 
 button {
-    position: relative;
-    display: inline-block;
-    padding: .6em;
-    background: rgba(0,0,0,0);
-    border-radius: 10em;
-    border: 0 solid #d0d0d0;
-    width: 6em;
-    height: 6em;
-    margin-right: 10px;
-    /*box-shadow: 0 0.48em 0.56em rgba(0, 0, 0, 0.4);*/
+  position: relative;
+  display: inline-block;
+  padding: .6em;
+  background: rgba(0,0,0,0);
+  border-radius: 10em;
+  border: 0 solid #d0d0d0;
+  width: 6em;
+  height: 6em;
+  margin-right: 10px;
+  /*box-shadow: 0 0.48em 0.56em rgba(0, 0, 0, 0.4);*/
 }
 
 .center {
-    display: block;
-    margin: 0 auto;
+  display: block;
+  margin: 0 auto;
 }
 
 .video-container {
-    /*border-radius: 20px;*/
-    position: relative;
-    padding-bottom: 56.25%; /* 16:9 */
-    padding-top: 25px;
+  /*border-radius: 20px;*/
+  position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 25px;
+	height: 0;
 }
 
 .main-view {
-    opacity: 0;
-    transition: opacity .5s linear;
-    width: 100%;
+  opacity: 0;
+  transition: opacity .5s linear;
+  width: 100%;
 }
 
 .main-background {
-    background-color: rgba(40,80,100,.3);
+  background-color: rgba(40,80,100,.3);
 }
 
 .username-container {
-    position: absolute;
-    top: 0;
-    color: white;
-    opacity: 0;
-    font-family: sans-serif;
-    font-size: 40px;
-    text-align: center;
-    text-transform: lowercase;
-    transition: opacity .5s linear;
+  position: absolute;
+  top: 0;
+  color: white;
+  opacity: 0;
+  font-family: sans-serif;
+  font-size: 40px;
+  text-align: center;
+  text-transform: lowercase;
+  transition: opacity .5s linear;
 }
 
 .active {
-    opacity: 1;
+  opacity: 1;
 }
 
 .signup {
-    border: 2px solid white;
-    font-size: 40px;
-    height: 50px;
-    margin: 30px auto;
-    width: 80%;
+  border: 2px solid white;
+  font-size: 40px;
+  height: 50px;
+  margin: 30px auto;
+  width: 80%;
 }
 
 input:active, input:focus {
-    outline: none;
+  outline: none;
+}
+
+@media (min-width: 920px) {
+  .center {
+    width: 850px;
+  }
+
+  .username-container {
+    width: 850px;
+  }
+
+  .button-bar {
+    margin-top: 20px;
+  }
+  
+  .video-container {
+    height: 478px;
+    padding-bottom: 0;
+    padding-top: 0;
+    width: 850px;
+  }
 }
