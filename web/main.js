@@ -1,7 +1,5 @@
 //TODO, handle getting next video while playback is paused
 // bug where video in list is not watchable
-// bug autoplay next
-// get more videos when we run out
 
 // TODO: styles
 // don't show video container till streams load
@@ -59,6 +57,7 @@ var currentIndex = 0;
 
 // store the user
 var currentUser = "";
+var hasPaused = false;
 
 var getMoreVideos = function(username, doNotGetNextVid) {
   cb = function(request) {
@@ -108,7 +107,7 @@ var trackVideoWatch = function(roulette) {
     isrc: randomVideos[currentIndex].Isrc,
     duration: getTimeCode(video.currentTime),
     IsRoulette: roulette,
-    HasPressedPaused: false // TODO: hook this up
+    HasPressedPaused: hasPaused
   })
   makeRequest(cb, "post", "http://newvevo.azurewebsites.net/api/newvevo/MarkWatched", data);
 }
@@ -129,10 +128,12 @@ username.addEventListener('keyup', function(event){
   }
 });
 
+// play pause click
 playPauseBtn.addEventListener('click', function (event) {
   togglePlayPause();
 });
 
+// roulette key
 rouletteBtn.addEventListener('click', function(event){
   // video.src = getNextVideo();
   playPauseBtn.classList.add('disable');
@@ -167,6 +168,9 @@ var togglePlayPause = function (displayOnly) {
   if(classList.contains('play')) {
     classList.remove('play');
     classList.add('pause');
+    if(!hasPaused) {
+      hasPaused = true;
+    }
     if(!displayOnly) {
       video.play();
     }
