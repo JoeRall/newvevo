@@ -1,40 +1,34 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
-
-<div ng-controller="mainCtrl" ng-cloak>
-    <div class="jumbotron">
-        <div class="new-user" ng-show="IsNewUser">
-            <h1 class="text-center">New Vevo</h1>
-            <p class="lead text-center">New Videos. No Ads. All Awesome.</p>
-
-            <p class="text-center">
-                <input id="userTB" class="text-center" placeholder="User Name" />
-            </p>
-
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Video Roulette</title>
+    <link rel="stylesheet" href="/web/style.css"></link>
+    <meta name="viewport" content="initial-scale=1.0,width=device-width">
+</head>
+<body>
+    <div class="center">
+        <div class="main-view">
+            <div class="main-background">
+                <div class="video-container">
+                    <video id="video" src="http://h264-aws.vevo.com/v3/h264/2015/05/USCJY1531563/80adc0c5-df6f-4c02-b391-7fd1dbf72178/uscjy1531563_high_1280x720_h264_2000_aac_128.mp4"
+                           width="100%" height="100%" poster="/web/roulette_logo.png"></video>
+                </div>
+                <div class="button-bar">
+                    <button id="playpause" class="play"></button>
+                    <button id="random" class="next"></button>
+                    <img id="roulette" width="90px" height="auto" src="/web/roulette_logo.png" />
+                </div>
+            </div>
+            <div id="history" class="watch-history">
+                <span id="watch-history-title">Previously Watched Videos</span>
+            </div>
         </div>
-
-        <div class="existing-user" ng-show="IsExistingUser">
-            <h3>{{CurrentVideo.Title}} by {{CurrentVideo.Artist}}</h3>
-
-            <video id="thePlayer" width="640" height="480" controls>
-                @*<source ng-repeat="s in ActiveStreams" src="{{s.Url}}" type="video/mp4">*@
-                your browser does not support the video tag.
-            </video>
-            <br />
-            <i class="fa fa-3x fa-random" ng-click="Next()"></i>
+        <div class="username-container active">
+            <span>Enter a username</span></br>
+            <input id="username" class="signup"></input>
         </div>
     </div>
-</div>
 
-
-@section scripts {
-    <script type="text/javascript">
-
-        $('#userTB').keypress(function (e) {
-            if (e.which == 13) {
-                location = "/u/" + $('#userTB').val();
-            }
-        });
-    </script>
-}
+    <script src="/web/main.js"></script>
+</body>
+</html>
