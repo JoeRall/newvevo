@@ -38,24 +38,34 @@ namespace NewVevo.Controllers
         }
 
 
-        public static async Task<ApplicationUser> CreateUserIfNotExists(string id, ApplicationUserManager um)
-        {
-            //-- Create User if it Doesn't exist
-            var user = await um.FindByNameAsync(id);
 
-            if (null == user)
+        public static async Task<UserTuple> CreateUserIfNotExists(string id, ApplicationUserManager um)
+        {
+            var response = new UserTuple();
+
+            //-- Create User if it Doesn't exist
+            response.User = await um.FindByNameAsync(id);
+
+            if (null == response.User)
             {
-                user = new ApplicationUser { UserName = id, Email = string.Format("{0:N}@email.com", Guid.NewGuid()) };
-                var result = await um.CreateAsync(user);
+                response.IsNewUser = true;
+                response.User = new ApplicationUser { UserName = id, Email = string.Format("{0:N}@email.com", Guid.NewGuid()) };
+                var result = await um.CreateAsync(response.User);
 
                 if (!result.Succeeded)
                     throw new Exception("Ooops. Something went really wrong");
 
                 //-- Make sure that if we're using the Watched Videos, it's set and not null
-                user.WatchedVideos = new List<WatchedVideo>();
+                response.User.WatchedVideos = new List<WatchedVideo>();
             }
 
-            return user;
+            return response;
         }
+    }
+
+    public class UserTuple
+    {
+        public bool IsNewUser { get; set; }
+        public ApplicationUser User { get; set; }
     }
 }

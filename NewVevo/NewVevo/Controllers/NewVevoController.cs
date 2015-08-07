@@ -28,14 +28,19 @@ namespace NewVevo.Controllers
         private readonly VideoService vsvc = new VideoService();
 
         [HttpGet]
-        public async Task<Video[]> Next(string userId)
+        public async Task<NextResponse> Next(string userId)
         {
             var user = await GetUser(userId);
 
             if (null == user)
                 return null;
 
-            return svc.GetRandomVideos(user);
+            var response = new NextResponse();
+
+            response.Videos = svc.GetRandomVideos(user.User);
+            response.IsNewUser = user.IsNewUser;
+            response.WatchHistory = user.User.WatchedVideos;
+            return response;
         }
 
         [HttpGet]
@@ -53,7 +58,7 @@ namespace NewVevo.Controllers
 
             var watched = new WatchedVideo
             {
-                User = user,
+                User = user.User,
                 Video = video,
                 WatchDate = DateTime.Now,
                 AmountWatched = request.Duration,
@@ -65,11 +70,9 @@ namespace NewVevo.Controllers
             ctx.SaveChanges();
         }
 
-        private async Task<ApplicationUser> GetUser(string userId)
+        private async Task<UserTuple> GetUser(string userId)
         {
-            var user = await BaseController.CreateUserIfNotExists(userId, new ApplicationUserManager());
-            
-            return user;
+            return await BaseController.CreateUserIfNotExists(userId, new ApplicationUserManager());
         }
 
         public class MWRequest
@@ -79,6 +82,14 @@ namespace NewVevo.Controllers
             public TimeSpan Duration { get; set; }
             public bool IsRoulette { get; set; }
             public bool HasPressedPaused { get; set; }
+        }
+
+
+        public class NextResponse
+        {
+            public Video[] Videos { get; set; }
+            public bool IsNewUser { get; set; }
+            public ICollection<WatchedVideo> WatchHistory { get; set; }
         }
     }
 }
