@@ -60,7 +60,7 @@ var hasPaused = false;
 var getMoreVideos = function(username, doNotGetNextVid) {
   cb = function(request) {
     if (request.readyState === 4) {
-        randomVideos = randomVideos.concat(JSON.parse(request.response));
+        randomVideos = randomVideos.concat(JSON.parse(request.response).Videos);
 
         //-- I know this looks weird
         if (!doNotGetNextVid)
