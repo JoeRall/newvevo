@@ -27,6 +27,18 @@ span {
 .coach-marks {
   display: block;
   position: absolute;
+  width: 100%;
+  color: white;
+  text-align: center;
+  background-color: #000;
+  padding: 5px;
+  box-sizing: border-box;
+  top: -54px;
+}
+
+.highlight {
+  background: black;
+  border: 4px solid black;
 }
 
 .roulette {
@@ -37,6 +49,7 @@ span {
   padding-bottom: 10px;
   margin-bottom: 10px;
   margin-top: 40px;
+  position: relative;
 }
 
 .watch-history div {
@@ -80,6 +93,15 @@ span {
   background-color: rgba(255, 255, 255, 1);
   left: 5.528em;
   content: " ";
+}
+
+.highlight-btn.next:after {
+  border-left-color: black;
+  background-color: black;
+}
+
+.highlight-btn.next:before {
+  border-left-color: black;
 }
 
 .next:before {
