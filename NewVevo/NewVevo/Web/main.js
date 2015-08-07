@@ -1,5 +1,4 @@
 //TODO handle getting next video while playback is paused
-// first time click issues
 // change on any button
 
 // TODO: styles
@@ -121,7 +120,6 @@ var trackVideoWatch = function (roulette) {
 }
 
 random.addEventListener('click', function (event) {
-    trackVideoWatch();
     if (hasPlayed) {
         trackVideoWatch(true);
         getNextVideo(true);
@@ -174,7 +172,7 @@ video.addEventListener('ended', function (event) {
 
 var hasPlayed = false;
 video.addEventListener('play', function () {
-    if (playPauseBtn.classList.contains('fa-pause')) {
+    if (playPauseBtn.classList.contains('fa-play')) {
         togglePlayPause(true);
     }
 });
@@ -199,7 +197,7 @@ var togglePlayPause = function (displayOnly) {
         }
     } else {
         classList.remove('fa-pause');
-        classList.add('fa-pause');
+        classList.add('fa-play');
         if (!displayOnly) {
             video.pause();
         }
