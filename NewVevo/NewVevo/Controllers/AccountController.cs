@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using NewVevo.Models;
+using NewVevo.Entity.Models;
 
 namespace NewVevo.Controllers
 {
