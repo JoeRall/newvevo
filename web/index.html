@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Video Roulette</title>
+    <link rel="stylesheet" href="style.css"></link>
+  </head>
+  <body>
+    <div class="center">
+      <div class="video-container">
+        <video id="video" src="http://h264-aws.vevo.com/v3/h264/2015/05/USCJY1531563/80adc0c5-df6f-4c02-b391-7fd1dbf72178/uscjy1531563_high_1280x720_h264_2000_aac_128.mp4"
+               width="100%" height="auto" poster="roulette_logo.png"></video>
+        <button id="playpause" class="play"></button>
+        <button id="random" class="next"></button>
+        <img id="roulette" width="90px" height="auto" src="roulette_logo.png"/>
+      </div>
+      <div class="username-container active">
+        <span>Enter a username</span></br>
+        <input id="username" class="signup"></input>
+      </div>
+
+      <div class="watch-history">
+        <!-- <div>
+          <span>Title: </span><span id="title"></span>
+          <span>Artist: </span><span id="artist"></span>
+        </div> -->
+      </div>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>
