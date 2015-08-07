@@ -65,7 +65,7 @@ namespace NewVevo.Controllers
 
             var watched = new WatchedVideo
             {
-                User = user.User,
+                UserId = user.User.Id,
                 Video = video,
                 WatchDate = DateTime.Now,
                 AmountWatched = request.Duration,
