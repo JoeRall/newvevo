@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewVevo", "NewVevo\NewVevo.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewVevo.Entity", "NewVevo.Entity\NewVevo.Entity.csproj", "{349E5C6D-652B-439E-9CC8-431F069C2256}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewVevo.Console", "NewVevo.Console\NewVevo.Console.csproj", "{19731417-5309-4F00-849E-669B90EE97B9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{349E5C6D-652B-439E-9CC8-431F069C2256}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{349E5C6D-652B-439E-9CC8-431F069C2256}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{349E5C6D-652B-439E-9CC8-431F069C2256}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19731417-5309-4F00-849E-669B90EE97B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19731417-5309-4F00-849E-669B90EE97B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19731417-5309-4F00-849E-669B90EE97B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19731417-5309-4F00-849E-669B90EE97B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
