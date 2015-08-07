@@ -81,7 +81,7 @@ span {
 
 .disable {
   pointer-events: none;
-  opacity: .5;
+  opacity: .25;
 }
 
 .next:before{
@@ -197,12 +197,14 @@ button {
 .username-container {
   position: absolute;
   top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   color: white;
   opacity: 0;
   font-family: sans-serif;
   font-size: 40px;
   text-align: center;
-  text-transform: lowercase;
   transition: opacity .5s linear;
 }
 
@@ -234,7 +236,7 @@ input:active, input:focus {
   .button-bar {
     margin-top: 20px;
   }
-  
+
   .video-container {
     height: 478px;
     padding-bottom: 0;

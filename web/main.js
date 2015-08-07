@@ -1,4 +1,5 @@
-//TODO, handle getting next video while playback is paused
+//TODO handle getting next video while playback is paused
+// first time click issues
 
 // TODO: styles
 // don't show video container till streams load
@@ -56,15 +57,23 @@ var currentIndex = 0;
 // store the user
 var currentUser = "";
 var hasPaused = false;
+var isNewUser = false;
 
 var getMoreVideos = function(username, doNotGetNextVid) {
   cb = function(request) {
     if (request.readyState === 4) {
-        randomVideos = randomVideos.concat(JSON.parse(request.response).Videos);
-
+        response = JSON.parse(request.response);
+        randomVideos = randomVideos.concat(response.Videos);
+        isNewUser = response.IsNewUser;
         //-- I know this looks weird
-        if (!doNotGetNextVid)
-            getNextVideo();
+        if (!doNotGetNextVid) {
+          getNextVideo();
+        }
+
+        if (isNewUser) {
+          showCoachMarks();
+        }
+
     }
   }
 
@@ -79,7 +88,7 @@ var getNextVideo = function(startPlay) {
       currentIndex++;
       return getNextVideo(startPlay);
     }
-    video.src = response[2].url;
+    video.src = response[1].url;
     video.load();
     if (startPlay) {
       video.play();
@@ -122,7 +131,6 @@ username.addEventListener('keyup', function(event){
     document.getElementsByClassName('main-view')[0].classList.toggle('active');
     currentUser = username.value
     getMoreVideos(currentUser);
-    showCoachMarks();
   }
 });
 
@@ -136,6 +144,7 @@ rouletteBtn.addEventListener('click', function(event){
   // video.src = getNextVideo();
   playPauseBtn.classList.add('disable');
   randomBtn.classList.add('disable');
+  rouletteBtn.classList.add('disable');
   trackVideoWatch(true);
   getNextVideo(true);
 });
@@ -145,6 +154,7 @@ video.addEventListener('ended', function(event){
   getNextVideo(true);
   playPauseBtn.classList.remove('disable');
   randomBtn.classList.remove('disable');
+  rouletteBtn.classList.remove('disable');
 });
 
 var hasPlayed = false;
