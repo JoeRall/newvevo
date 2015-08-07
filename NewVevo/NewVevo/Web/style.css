@@ -27,6 +27,23 @@ span {
 }
 
 .coach-marks {
+<<<<<<< HEAD
+  display: block;
+  position: absolute;
+  width: 100%;
+  color: white;
+  text-align: center;
+  background-color: rgb(223, 32, 153);
+  padding: 5px;
+  box-sizing: border-box;
+  top: -54px;
+  min-height: 40px;
+}
+
+.highlight {
+  background: rgb(223, 32, 153);
+  border: 4px solid rgb(223, 32, 153);
+=======
     display: block;
     position: absolute;
     width: 100%;
@@ -42,6 +59,7 @@ span {
 .highlight {
     background: black;
     border: 4px solid black;
+>>>>>>> c166a4f4e58bfbf166222bde5b33bbc52657b696
 }
 
 .button-bar {
@@ -83,38 +101,6 @@ span {
 .disable {
     pointer-events: none;
     opacity: .25;
-}
-
-.next:before {
-    width: 0;
-    height: 0;
-    top: 1.08em;
-    border: 2em solid transparent;
-    border-left-color: rgba(255, 255, 255, 1);
-    border-left-width: 2.5em;
-}
-
-.next:after {
-    display: block;
-    height: 3.76em;
-    width: 1.52em;
-    top: 1.24em;
-    background-color: rgba(255, 255, 255, 1);
-    left: 5.528em;
-    content: " ";
-}
-
-.highlight-btn.next:after {
-    border-left-color: black;
-    background-color: black;
-}
-
-.highlight-btn.next:before {
-    border-left-color: black;
-}
-
-.next:before {
-    left: 2.3em;
 }
 
 .pause:before, .pause:after {
