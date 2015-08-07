@@ -58,11 +58,14 @@ var currentIndex = 0;
 // store the user
 var currentUser = "";
 
-var getMoreVideos = function(username) {
+var getMoreVideos = function(username, doNotGetNextVid) {
   cb = function(request) {
     if (request.readyState === 4) {
-      randomVideos = randomVideos.concat(JSON.parse(request.response));
-      getNextVideo();
+        randomVideos = randomVideos.concat(JSON.parse(request.response));
+
+        //-- I know this looks weird
+        if (!doNotGetNextVid)
+            getNextVideo();
     }
   }
 
@@ -81,6 +84,10 @@ var getNextVideo = function(startPlay) {
     video.load();
     if (startPlay) {
       video.play();
+    }
+
+    if (currentIndex < randomVideos.length - 5) {
+        getMoreVideos(currentUser, true);
     }
   }
   isrc = randomVideos[currentIndex++].Isrc;
