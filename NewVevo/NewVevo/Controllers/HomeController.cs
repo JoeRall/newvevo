@@ -35,6 +35,9 @@ namespace NewVevo.Controllers
                 var ut = await BaseController.CreateUserIfNotExists(id, UserManager);
                 m.User = ut.User;
                 m.WatchHistory = ut.User.WatchedVideos;
+
+                m.WatchHistory = GetLatestHistory(ut.User.WatchedVideos);
+
                 m.IsValid = true;
             }
             else
@@ -43,6 +46,13 @@ namespace NewVevo.Controllers
             }
 
             return View(m);
+        }
+
+        private ICollection<WatchedVideo> GetLatestHistory(ICollection<WatchedVideo> collection)
+        {
+            var byIsrc = collection.GroupBy(v => v.Video.Isrc);
+
+            return byIsrc.Select(v => v.Last()).ToList();
         }
 
         public ActionResult About()
