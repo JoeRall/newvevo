@@ -137,6 +137,7 @@ username.addEventListener('keyup', function(event){
     document.getElementsByClassName('username-container')[0].classList.toggle('active');
     document.getElementsByClassName('main-view')[0].classList.toggle('active');
     currentUser = username.value
+    document.getElementById('watch-history-title').href = "http://newvevo.azurewebsites.net/history/" + currentUser;
     getMoreVideos(currentUser);
   }
 });
@@ -213,9 +214,9 @@ var addToWatchHistory = function() {
   var link = document.createElement('a');
   link.href = "http://www.vevo.com/watch/" + randomVideos[videoIndex].Isrc;
   link.target = "_blank";
-  spanTitle.innerHTML = "Title: " + randomVideos[videoIndex].Title;
+  spanTitle.innerHTML = randomVideos[videoIndex].Title;
   spanTitle.class = "title-item";
-  spanArtist.innerHTML = "Artist: " + randomVideos[videoIndex].Artist;
+  spanArtist.innerHTML = "by " + randomVideos[videoIndex].Artist;
   spanArtist.class = "artist-item";
   link.appendChild(spanTitle);
   link.appendChild(spanArtist);
