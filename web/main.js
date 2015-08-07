@@ -1,10 +1,8 @@
 //TODO, handle getting next video while playback is paused
-// bug where video in list is not watchable
 
 // TODO: styles
 // don't show video container till streams load
 // hover states on buttons
-// desktop css
 
 
 var token = "_TMw_fGgJHvzr84MqwK1eWhBgbdebZhAm_y3W1ou-sU1.1439085600.xrqkd87wbBX66Jh0rdWF_bDvOl6CfmhH_vc1-THLJjnmOfVeGM1dK14xiHsiZTSP7-jakA2";
