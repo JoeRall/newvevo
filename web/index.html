@@ -3,26 +3,29 @@
   <head>
     <title>Video Roulette</title>
     <link rel="stylesheet" href="style.css"></link>
+    <meta name="viewport" content="initial-scale=1.0,width=device-width">
   </head>
   <body>
     <div class="center">
-      <div class="video-container">
-        <video id="video" src="http://h264-aws.vevo.com/v3/h264/2015/05/USCJY1531563/80adc0c5-df6f-4c02-b391-7fd1dbf72178/uscjy1531563_high_1280x720_h264_2000_aac_128.mp4"
-               width="100%" height="auto" poster="roulette_logo.png"></video>
-        <button id="playpause" class="play"></button>
-        <button id="random" class="next"></button>
-        <img id="roulette" width="90px" height="auto" src="roulette_logo.png"/>
+      <div class="main-view">
+        <div class="main-background">
+          <div class="video-container">
+            <video id="video" src="http://h264-aws.vevo.com/v3/h264/2015/05/USCJY1531563/80adc0c5-df6f-4c02-b391-7fd1dbf72178/uscjy1531563_high_1280x720_h264_2000_aac_128.mp4"
+                   width="100%" height="100%" poster="roulette_logo.png"></video>
+          </div>
+          <div class="button-bar">
+            <button id="playpause" class="play"></button>
+            <button id="random" class="next"></button>
+            <img id="roulette" width="90px" height="auto" src="roulette_logo.png"/>
+          </div>
+        </div>
+        <div id="history" class="watch-history">
+          <span id="watch-history-title">Previously Watched Videos</span>
+        </div>
       </div>
       <div class="username-container active">
         <span>Enter a username</span></br>
         <input id="username" class="signup"></input>
-      </div>
-
-      <div class="watch-history">
-        <!-- <div>
-          <span>Title: </span><span id="title"></span>
-          <span>Artist: </span><span id="artist"></span>
-        </div> -->
       </div>
     </div>
 
