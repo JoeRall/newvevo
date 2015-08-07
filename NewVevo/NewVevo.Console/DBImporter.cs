@@ -38,13 +38,45 @@ namespace NewVevo.Console
                 videos.Add(vid);
             }
 
-            var byIsrc = videos.GroupBy(v => v.Isrc).Select(v => Combine(v));
+            var byIsrc = videos.GroupBy(v => v.Isrc).Select(v => Combine(v)).ToArray();
 
 
             var ctx = new VevoContext();
             ctx.Database.ExecuteSqlCommand("Delete From Videos");
-            ctx.Videos.AddRange(byIsrc);
-            ctx.SaveChanges();
+
+            var currentSkip = 0;
+            
+            while (currentSkip < byIsrc.Length)
+            {
+                BatchInsert(byIsrc.Skip(currentSkip).Take(1000), ctx);
+                currentSkip += 1000;
+            }
+        }
+
+        private static void BatchInsert(IEnumerable<Video> byIsrc, VevoContext ctx)
+        {
+            var sb = new System.Text.StringBuilder();
+            sb.Append("insert into Videos (title, isrc, artistid, artist, videoyear, duration, totalviews, genre) ");
+            foreach (var v in byIsrc)
+            {
+                sb.AppendFormat("SELECT '{0}','{1}','{2}','{3}',{4},'{5}',{6},'{7}' UNION ",
+                    SafeReplace(v.Title),
+                    SafeReplace(v.Isrc),
+                    SafeReplace(v.ArtistId),
+                    SafeReplace(v.Artist),
+                    v.VideoYear, v.Duration, v.TotalViews, SafeReplace(v.Genre)
+                    );
+            }
+            sb.Length = sb.Length - 7;
+
+            ctx.Database.ExecuteSqlCommand(sb.ToString());
+        }
+
+        private static string SafeReplace(string val)
+        {
+            if (string.IsNullOrEmpty(val)) return string.Empty;
+
+            return val.Replace("'", "''");
         }
 
         //private DateTime CoalseceDateTime(DateTime dt)

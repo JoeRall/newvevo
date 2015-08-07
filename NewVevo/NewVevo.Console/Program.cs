@@ -10,15 +10,16 @@ namespace NewVevo.Console
     {
         static void Main(string[] args)
         {
+            DBImporter.ReadFile(@"C:\Users\JoeRall\Downloads\videoDB_1mil_tab.txt");
             //TestRunningRandom();
 
-            var svc = new VideoService();
-            var streams = svc.GetVideoUrls("USSM21302490");
+            //var svc = new VideoService();
+            //var streams = svc.GetVideoUrls("USSM21302490");
 
-            foreach (var s in streams)
-            {
-                System.Console.WriteLine("Stream: {0}", s.Url);
-            }
+            //foreach (var s in streams)
+            //{
+            //    System.Console.WriteLine("Stream: {0}", s.Url);
+            //}
         }
 
         private static void TestRunningRandom()

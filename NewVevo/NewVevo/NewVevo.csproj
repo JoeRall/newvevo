@@ -235,7 +235,9 @@
     <Content Include="fonts\FontAwesome.otf" />
     <None Include="Properties\PublishProfiles\newvevo.pubxml" />
     <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="Scripts\DatTypeScripts\NewVevo.js.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\DatTypeScripts\NewVevo.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

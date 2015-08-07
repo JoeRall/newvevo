@@ -2,6 +2,7 @@
 using NewVevo.Entity.Models;
 using NewVevo.Entity.Services;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
@@ -18,6 +19,7 @@ namespace NewVevo.Controllers
         }
 
         private readonly VevoContext ctx = new VevoContext();
+        private readonly VideoService vsvc = new VideoService();
 
         [HttpGet]
         public Video[] Next(string userId)
@@ -28,6 +30,12 @@ namespace NewVevo.Controllers
                 return null;
 
             return svc.GetRandomVideos(user);
+        }
+
+        [HttpGet]
+        public List<Stream> Streams(string isrc)
+        {
+            return vsvc.GetVideoUrls(isrc);
         }
 
         [HttpPost]
