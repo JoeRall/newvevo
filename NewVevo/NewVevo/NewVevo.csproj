@@ -23,7 +23,7 @@
     <IISExpressUseClassicPipelineMode />
     <NuGetPackageImportStamp>4d633bf2</NuGetPackageImportStamp>
     <ApplicationInsightsResourceId>/subscriptions/292a9cb7-463a-40e0-b43f-0c581da990a5/resourcegroups/Default-ApplicationInsights-CentralUS/providers/microsoft.insights/components/NewVevo</ApplicationInsightsResourceId>
-    <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.5</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -199,6 +199,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NewVevoController.cs" />
