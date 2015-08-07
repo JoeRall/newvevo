@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="YXb-oD-7kQ">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <scenes>
+        <!--Login View Controller-->
+        <scene sceneID="vcR-PG-WQ6">
+            <objects>
+                <viewController storyboardIdentifier="LoginViewController" id="CTs-9l-rqK" userLabel="Login View Controller" customClass="LoginViewController" customModule="VideoRoulette" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="J4K-zx-cty"/>
+                        <viewControllerLayoutGuide type="bottom" id="xsY-4W-MBs"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yM5-Yg-pFd">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="roulette_logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="sMS-tS-NOV">
+                                <rect key="frame" x="115" y="29" width="370" height="215"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="370" id="TG8-PQ-wAC"/>
+                                    <constraint firstAttribute="height" constant="215" id="Y2h-Gr-lyi"/>
+                                </constraints>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mSr-EM-e9Z">
+                                <rect key="frame" x="190" y="274" width="221" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="8Vm-Iy-q8z"/>
+                                    <constraint firstAttribute="width" constant="221" id="WIy-Ey-NIS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="done"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter A Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3YM-ta-pn5">
+                                <rect key="frame" x="230" y="235" width="140" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="3YM-ta-pn5" secondAttribute="centerY" constant="54.5" id="4hc-lY-brr"/>
+                            <constraint firstAttribute="centerX" secondItem="sMS-tS-NOV" secondAttribute="centerX" constant="-0.5" id="58x-7N-AOr"/>
+                            <constraint firstAttribute="centerY" secondItem="sMS-tS-NOV" secondAttribute="centerY" constant="163.5" id="Gwm-l8-vWL"/>
+                            <constraint firstAttribute="centerY" secondItem="mSr-EM-e9Z" secondAttribute="centerY" constant="11" id="QeA-ei-TIJ"/>
+                            <constraint firstAttribute="centerX" secondItem="3YM-ta-pn5" secondAttribute="centerX" id="n2L-pR-BdL"/>
+                            <constraint firstAttribute="centerX" secondItem="mSr-EM-e9Z" secondAttribute="centerX" constant="-0.5" id="zPa-wQ-LMz"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="ttR-14-NoE"/>
+                    <connections>
+                        <outlet property="emailTextField" destination="mSr-EM-e9Z" id="Wlc-Ei-B4a"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Jg-my-mee" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1152" y="-501"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="ufC-wZ-h7g">
+            <objects>
+                <viewController storyboardIdentifier="movieViewController" id="vXZ-lx-hvc" customClass="ViewController" customModule="VideoRoulette" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
+                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8fc-pE-cFu">
+                                <rect key="frame" x="267" y="452" width="70" height="70"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.040183829109999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="2uL-gY-A9X"/>
+                                    <constraint firstAttribute="height" constant="70" id="Vf0-zY-XOj"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="Roulette">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="rouletteButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="aRn-nf-58o"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dHv-t8-j19">
+                                <rect key="frame" x="267" y="266" width="70" height="70"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0013305250376346445" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="dsJ-pj-v3d"/>
+                                    <constraint firstAttribute="height" constant="70" id="yh2-0A-unR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="Random">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="randomButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="QoD-5E-tFX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rjn-Jo-jeR">
+                                <rect key="frame" x="16" y="266" width="22" height="22"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ln-Op-ykw">
+                                <rect key="frame" x="267" y="359" width="70" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="4ij-f0-54F"/>
+                                    <constraint firstAttribute="height" constant="70" id="Iny-Kw-6ye"/>
+                                </constraints>
+                                <state key="normal" image="pause.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="playButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Osl-xn-n5w"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.28627450980392155" green="0.70588235294117652" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="3ln-Op-ykw" firstAttribute="top" secondItem="dHv-t8-j19" secondAttribute="bottom" constant="23" id="07f-m3-Fcf"/>
+                            <constraint firstAttribute="centerY" secondItem="3ln-Op-ykw" secondAttribute="centerY" constant="-94" id="AnK-EW-5xi"/>
+                            <constraint firstAttribute="centerX" secondItem="8fc-pE-cFu" secondAttribute="centerX" constant="-2" id="hqH-Rw-MW2"/>
+                            <constraint firstAttribute="centerX" secondItem="3ln-Op-ykw" secondAttribute="centerX" constant="-2" id="jNB-WT-mgg"/>
+                            <constraint firstItem="8fc-pE-cFu" firstAttribute="top" secondItem="3ln-Op-ykw" secondAttribute="bottom" constant="23" id="jNC-TA-f7y"/>
+                            <constraint firstAttribute="centerX" secondItem="dHv-t8-j19" secondAttribute="centerX" constant="-2" id="tb3-HD-UXi"/>
+                            <constraint firstAttribute="centerY" secondItem="dHv-t8-j19" secondAttribute="centerY" constant="-1" id="vse-8Z-DQd"/>
+                            <constraint firstAttribute="centerY" secondItem="8fc-pE-cFu" secondAttribute="centerY" constant="-187" id="wv3-A0-2nL"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Nn7-LU-m1t"/>
+                    <connections>
+                        <outlet property="playButton" destination="3ln-Op-ykw" id="UIF-0D-Dsb"/>
+                        <outlet property="randomButton" destination="dHv-t8-j19" id="nny-3E-UKW"/>
+                        <outlet property="rouletteButton" destination="8fc-pE-cFu" id="zfj-B6-Sqz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1170" y="241"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Kkw-5i-5oU">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YXb-oD-7kQ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xGl-p0-2Q1">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="Pnc-j0-biO"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="stw-fz-CaG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="392" y="256"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Ctc-NH-wAq">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sLL-35-apJ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Be7-IZ-bHe">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="CTs-9l-rqK" kind="relationship" relationship="rootViewController" id="me0-qn-hJe"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ybf-MF-jNO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="392" y="-495"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="pause.png" width="128" height="128"/>
+        <image name="roulette_logo.png" width="1168" height="956"/>
+    </resources>
+</document>
