@@ -1,5 +1,6 @@
 //TODO handle getting next video while playback is paused
 // first time click issues
+// change on any button
 
 // TODO: styles
 // don't show video container till streams load
@@ -121,8 +122,14 @@ var trackVideoWatch = function (roulette) {
 
 random.addEventListener('click', function (event) {
     trackVideoWatch();
-    getNextVideo(true);
-    addToWatchHistory();
+    if (hasPlayed) {
+        trackVideoWatch(true);
+        getNextVideo(true);
+        addToWatchHistory();
+    } else {
+        hasPlayed = true;
+        video.play();
+    }
 });
 
 username.addEventListener('keyup', function (event) {
@@ -145,13 +152,20 @@ rouletteBtn.addEventListener('click', function (event) {
     playPauseBtn.classList.add('disable');
     randomBtn.classList.add('disable');
     rouletteBtn.classList.add('disable');
-    trackVideoWatch(true);
-    getNextVideo(true);
+    if (hasPlayed) {
+        trackVideoWatch(true);
+        getNextVideo(true);
+        addToWatchHistory();
+    } else {
+        hasPlayed = true;
+        video.play();
+    }
 });
 
 video.addEventListener('ended', function (event) {
     trackVideoWatch();
     getNextVideo(true);
+    addToWatchHistory();
     playPauseBtn.classList.remove('disable');
     randomBtn.classList.remove('disable');
     rouletteBtn.classList.remove('disable');
@@ -206,8 +220,8 @@ var addToWatchHistory = function () {
     link.appendChild(spanTitle);
     link.appendChild(spanArtist);
     div.appendChild(link);
-    var history = document.getElementById('history')
-    history.appendChild(div);
+    var history = document.getElementById('history');
+    history.insertBefore(div, history.childNodes[2]);
 }
 
 var coachMarksDiv = function () {

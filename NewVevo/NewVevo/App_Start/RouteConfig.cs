@@ -20,6 +20,12 @@ namespace NewVevo
             );
 
             routes.MapRoute(
+                name: "History",
+                url: "history/{id}",
+                defaults: new { controller = "Home", action = "History", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

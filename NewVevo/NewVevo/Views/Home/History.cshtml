@@ -1,0 +1,47 @@
+﻿@model NewVevo.Models.HistoryModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Video Roulette</title>
+    <link rel="stylesheet" href="/web/style.css" />
+    <link rel="stylesheet" href="/css/font-awesome.css" />
+    <meta name="viewport" content="initial-scale=1.0,width=device-width">
+</head>
+<body>
+    <div class="center">
+        <div class="main-view active">
+            @if (!Model.IsValid)
+            {
+                <h1>Watch History</h1>
+                <p>Sorry . . . you need to enter a user name!</p>
+            }
+            else
+            {
+                <h1><i class="fa fa-clock-o"></i> Watch History -- @Model.WatchHistory.Count Videos</h1>
+                <div id="history" class="watch-history">
+                    @if (Model.WatchHistory.Count == 0)
+                    {
+                        <p>No Videos!</p>
+                    }
+                    else
+                    {
+                        foreach (var vid in Model.WatchHistory)
+                        {
+                            <div>
+                                <a href="http://www.vevo.com/watch/@vid.Video.Isrc" target="_blank" style="text-align:left">
+                                    <span>@vid.Video.Title by @vid.Video.Artist</span>
+                                </a>
+                            </div>
+                        }
+                    }
+
+                </div>
+            }
+        </div>
+
+    </div>
+
+</body>
+
+</html>
