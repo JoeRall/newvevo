@@ -42,6 +42,7 @@ namespace NewVevo.Console
 
 
             var ctx = new VevoContext();
+            ctx.Database.ExecuteSqlCommand("Delete from WatchedVideos");
             ctx.Database.ExecuteSqlCommand("Delete From Videos");
 
             var currentSkip = 0;

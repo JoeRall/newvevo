@@ -34,8 +34,6 @@ namespace NewVevo.Controllers
             return svc.GetRandomVideos(user);
         }
 
-        
-
         [HttpGet]
         public List<Stream> Streams(string isrc)
         {
@@ -43,18 +41,20 @@ namespace NewVevo.Controllers
         }
 
         [HttpPost]
-        public void MarkWatched(string userId, string isrc, TimeSpan duration)
+        public void MarkWatched(MWRequest request)
         {
-            var user = GetUser(userId);
+            var user = GetUser(request.UserId);
 
-            var video = ctx.Videos.FirstOrDefault(v => v.Isrc == isrc);
+            var video = ctx.Videos.FirstOrDefault(v => v.Isrc == request.Isrc);
 
             var watched = new WatchedVideo
             {
                 User = user,
                 Video = video,
                 WatchDate = DateTime.Now,
-                AmountWatched = duration
+                AmountWatched = request.Duration,
+                IsRoulette = request.IsRoulette,
+                PausedVideo = request.HasPressedPaused
             };
 
             ctx.WatchHistory.Add(watched);
@@ -65,6 +65,15 @@ namespace NewVevo.Controllers
         {
             var user = ctx.Users.FirstOrDefault(u => u.UserName == userId);
             return user;
+        }
+
+        public class MWRequest
+        {
+            public string UserId { get; set; }
+            public string Isrc { get; set; }
+            public TimeSpan Duration { get; set; }
+            public bool IsRoulette { get; set; }
+            public bool HasPressedPaused { get; set; }
         }
     }
 }
