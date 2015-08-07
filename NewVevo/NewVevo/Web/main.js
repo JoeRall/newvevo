@@ -174,23 +174,23 @@ video.addEventListener('ended', function (event) {
 
 var hasPlayed = false;
 video.addEventListener('play', function () {
-    if (playPauseBtn.classList.contains('play')) {
+    if (playPauseBtn.classList.contains('fa-pause')) {
         togglePlayPause(true);
     }
 });
 
 
 video.addEventListener('pause', function () {
-    if (playPauseBtn.classList.contains('pause')) {
+    if (playPauseBtn.classList.contains('fa-pause')) {
         togglePlayPause(true);
     }
 });
 
 var togglePlayPause = function (displayOnly) {
     classList = playPauseBtn.classList;
-    if (classList.contains('play')) {
-        classList.remove('play');
-        classList.add('pause');
+    if (classList.contains('fa-play')) {
+        classList.remove('fa-play');
+        classList.add('fa-pause');
         if (!hasPaused) {
             hasPaused = true;
         }
@@ -198,8 +198,8 @@ var togglePlayPause = function (displayOnly) {
             video.play();
         }
     } else {
-        classList.remove('pause');
-        classList.add('play');
+        classList.remove('fa-pause');
+        classList.add('fa-pause');
         if (!displayOnly) {
             video.pause();
         }
