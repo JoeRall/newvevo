@@ -76,6 +76,24 @@ namespace NewVevo.Entity.Migrations
                 .Index(t => t.UserId);
             
             CreateTable(
+                "dbo.WatchedVideos",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        UserId = c.String(maxLength: 128),
+                        VideoId = c.String(maxLength: 128),
+                        WatchDate = c.DateTime(nullable: false),
+                        AmountWatched = c.Time(nullable: false, precision: 7),
+                        IsRoulette = c.Boolean(nullable: false),
+                        PausedVideo = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
+                .ForeignKey("dbo.Videos", t => t.VideoId)
+                .Index(t => t.UserId)
+                .Index(t => t.VideoId);
+            
+            CreateTable(
                 "dbo.Videos",
                 c => new
                     {
@@ -84,23 +102,21 @@ namespace NewVevo.Entity.Migrations
                         Artist = c.String(),
                         Premiered = c.DateTime(nullable: false),
                         Duration = c.Time(nullable: false, precision: 7),
-                        AmountWatched = c.Time(nullable: false, precision: 7),
-                        ApplicationUser_Id = c.String(maxLength: 128),
                     })
-                .PrimaryKey(t => t.Isrc)
-                .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUser_Id)
-                .Index(t => t.ApplicationUser_Id);
+                .PrimaryKey(t => t.Isrc);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.Videos", "ApplicationUser_Id", "dbo.AspNetUsers");
+            DropForeignKey("dbo.WatchedVideos", "VideoId", "dbo.Videos");
+            DropForeignKey("dbo.WatchedVideos", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropIndex("dbo.Videos", new[] { "ApplicationUser_Id" });
+            DropIndex("dbo.WatchedVideos", new[] { "VideoId" });
+            DropIndex("dbo.WatchedVideos", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
@@ -108,6 +124,7 @@ namespace NewVevo.Entity.Migrations
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropTable("dbo.Videos");
+            DropTable("dbo.WatchedVideos");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");

@@ -16,6 +16,7 @@ namespace NewVevo.Entity
             return new VevoContext();
         }
 
-        //public virtual DbSet<Video> Videos { get; set; }
+        public virtual DbSet<Video> Videos { get; set; }
+        public virtual DbSet<WatchedVideo> WatchHistory { get; set; }
     }
 }

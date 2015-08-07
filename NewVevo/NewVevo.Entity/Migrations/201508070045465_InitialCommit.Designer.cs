@@ -13,7 +13,7 @@ namespace NewVevo.Entity.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201508070028523_InitialCommit"; }
+            get { return "201508070045465_InitialCommit"; }
         }
         
         string IMigrationMetadata.Source

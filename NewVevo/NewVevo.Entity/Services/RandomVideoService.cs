@@ -19,7 +19,7 @@ namespace NewVevo.Entity.Services
 
         public Video[] GetRandomVideos(ApplicationUser user, int count = 10)
         {
-            var videosIHaventSeen = _library.Except(user.WatchedVideos).ToList();
+            var videosIHaventSeen = _library.Except(user.WatchedVideos.Select(v => v.Video)).ToList();
 
             var ran = new List<Video>();
 

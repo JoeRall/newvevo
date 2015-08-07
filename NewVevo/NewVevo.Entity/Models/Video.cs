@@ -12,7 +12,6 @@ namespace NewVevo.Entity.Models
         public DateTime Premiered { get; set; }
 
         public TimeSpan Duration { get; set; }
-        public TimeSpan AmountWatched { get; set; }
 
         public override bool Equals(object obj)
         {

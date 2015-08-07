@@ -18,6 +18,6 @@ namespace NewVevo.Entity.Models
             return userIdentity;
         }
 
-        public virtual List<Video> WatchedVideos { get; set; }
+        public virtual ICollection<WatchedVideo> WatchedVideos { get; set; }
     }
 }

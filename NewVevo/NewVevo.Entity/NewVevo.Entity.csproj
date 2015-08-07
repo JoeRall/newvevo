@@ -56,10 +56,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\201508070045465_InitialCommit.cs" />
+    <Compile Include="Migrations\201508070045465_InitialCommit.Designer.cs">
+      <DependentUpon>201508070045465_InitialCommit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Video.cs" />
-    <Compile Include="Models\WatchHistory.cs" />
+    <Compile Include="Models\WatchedVideo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\RandomVideoService.cs" />
     <Compile Include="VevoContext.cs" />
@@ -67,6 +71,11 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201508070045465_InitialCommit.resx">
+      <DependentUpon>201508070045465_InitialCommit.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
