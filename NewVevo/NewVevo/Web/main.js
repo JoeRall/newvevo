@@ -212,7 +212,7 @@ var addToWatchHistory = function () {
     var spanTitle = document.createElement('span');
     var spanArtist = document.createElement('span');
     var link = document.createElement('a');
-    link.href = "http://www.vevo.com/watch/" + randomVideos[videoIndex].Isrc;
+    link.href = "http://www.vevo.com/watch/" + randomVideos[videoIndex].Isrc + "?utm_source=vevo_roulette&utm_medium=history&utm_campaign=beta";
     link.target = "_blank";
     spanTitle.innerHTML = randomVideos[videoIndex].Title;
     spanTitle.class = "title-item";
