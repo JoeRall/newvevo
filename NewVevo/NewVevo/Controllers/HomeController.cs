@@ -14,17 +14,7 @@ namespace NewVevo.Controllers
         {
             if (!string.IsNullOrEmpty(id))
             {
-                //-- Create User if it Doesn't exist
-                var user = await UserManager.FindByNameAsync(id);
-
-                if (null == user)
-                {
-                    user = new ApplicationUser { UserName = id, Email = string.Format("{0:N}@email.com", Guid.NewGuid()) };
-                    var result = await UserManager.CreateAsync(user);
-                    
-                    if (!result.Succeeded)
-                        throw new Exception("Ooops. Something went really wrong");
-                }
+                await BaseController.CreateUserIfNotExists(id, UserManager);
             }
 
             return View();

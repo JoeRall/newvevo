@@ -4,29 +4,33 @@ using NewVevo.Entity.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
+// Maybe this one too
 
 namespace NewVevo.Controllers
 {
     [EnableCors("*", "*", "*")]
     public class NewVevoController : ApiController
     {
-        private static readonly RandomVideoService svc;
 
+        private static readonly RandomVideoService svc;
+        private readonly HomeController _hc;
         static NewVevoController()
         {
             var db = new VevoContext();
             svc = new RandomVideoService(db.Videos.ToList());
+            
         }
 
         private readonly VevoContext ctx = new VevoContext();
         private readonly VideoService vsvc = new VideoService();
 
         [HttpGet]
-        public Video[] Next(string userId)
+        public async Task<Video[]> Next(string userId)
         {
-            var user = GetUser(userId);
+            var user = await GetUser(userId);
 
             if (null == user)
                 return null;
@@ -41,9 +45,9 @@ namespace NewVevo.Controllers
         }
 
         [HttpPost]
-        public void MarkWatched(MWRequest request)
+        public async Task MarkWatched(MWRequest request)
         {
-            var user = GetUser(request.UserId);
+            var user = await GetUser(request.UserId);
 
             var video = ctx.Videos.FirstOrDefault(v => v.Isrc == request.Isrc);
 
@@ -61,9 +65,10 @@ namespace NewVevo.Controllers
             ctx.SaveChanges();
         }
 
-        private ApplicationUser GetUser(string userId)
+        private async Task<ApplicationUser> GetUser(string userId)
         {
-            var user = ctx.Users.FirstOrDefault(u => u.UserName == userId);
+            var user = await BaseController.CreateUserIfNotExists(userId, new ApplicationUserManager());
+            
             return user;
         }
 
