@@ -2,6 +2,7 @@ body {
   background: rgb(42, 192, 218);
   font-family: sans-serif;
   margin: 0;
+  color: white;
 }
 
 video {
@@ -50,6 +51,10 @@ span {
   margin-bottom: 10px;
   margin-top: 40px;
   position: relative;
+}
+
+.watch-history {
+  text-align: center;
 }
 
 .watch-history div {

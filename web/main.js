@@ -87,12 +87,12 @@ var getNextVideo = function(startPlay) {
     if (startPlay) {
       video.play();
     }
-
+    currentIndex++;
     if (currentIndex < randomVideos.length - 5) {
         getMoreVideos(currentUser, true);
     }
   }
-  isrc = randomVideos[currentIndex++].Isrc;
+  isrc = randomVideos[currentIndex].Isrc;
   makeRequest(cb, "get", "http://apiv2.vevo.com/video/" + isrc + "/streams/mp4?token=" + token);
 }
 
