@@ -15,14 +15,14 @@
         </div>
 
         <div class="existing-user" ng-show="IsExistingUser">
-            <h1>Welcome Back {{userName}}!</h1>
+            <h3>{{CurrentVideo.Title}} by {{CurrentVideo.Artist}}</h3>
 
-            <video width="320" height="240" controls>
-                <source ng-repeat="s in streams" src="s.url" type="video/mp4">
-                Your browser does not support the video tag.
+            <video id="thePlayer" width="640" height="480" controls>
+                @*<source ng-repeat="s in ActiveStreams" src="{{s.Url}}" type="video/mp4">*@
+                your browser does not support the video tag.
             </video>
             <br />
-            <i class="fa fa-3x fa-random"></i>
+            <i class="fa fa-3x fa-random" ng-click="Next()"></i>
         </div>
     </div>
 </div>

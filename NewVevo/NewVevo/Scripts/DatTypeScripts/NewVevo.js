@@ -26,21 +26,68 @@ var BaseController = (function () {
     }
     return BaseController;
 })();
+var Video = (function () {
+    function Video() {
+    }
+    return Video;
+})();
+var Stream = (function () {
+    function Stream() {
+    }
+    return Stream;
+})();
 var MainCtrl = (function (_super) {
     __extends(MainCtrl, _super);
-    function MainCtrl($scope, $http) {
+    function MainCtrl($scope, $http, $sce) {
+        var _this = this;
         _super.call(this, $scope);
         this.$scope = $scope;
         this.$http = $http;
+        this.$sce = $sce;
         if (location.pathname.indexOf("/u/") == 0) {
             $scope.userName = location.pathname.substring(3);
+            $http.get("/api/newvevo/Next?userId=" + $scope.userName).then(function (result) {
+                if (result.status != 200) {
+                    alert('Error -> ' + result.statusText);
+                    return;
+                }
+                _this.$scope.Videos = result.data;
+                if (_this.$scope.Videos != null) {
+                    _this.$scope.CurrentVideo = _this.$scope.Videos[0];
+                    _this.$http.get("/api/newvevo/Streams?isrc=" + _this.$scope.CurrentVideo.Isrc)
+                        .then(function (sResult) {
+                        if (sResult.status != 200) {
+                            alert('Error -> ' + sResult.statusText);
+                            return;
+                        }
+                        _this.$scope.ActiveStreams = sResult.data;
+                        for (var i = 0; i < _this.$scope.ActiveStreams.length; i++) {
+                            _this.$scope.ActiveStreams[i].Url = _this.$sce.trustAsResourceUrl(_this.$scope.ActiveStreams[i].Url);
+                        }
+                        _this.PlayUrl(_this.$scope.ActiveStreams[0].Url);
+                    });
+                }
+            });
             $scope.IsExistingUser = true;
         }
         else {
             $scope.IsNewUser = true;
         }
     }
+    MainCtrl.prototype.PlayUrl = function (url) {
+        setTimeout(function () {
+            var player = $('#thePlayer')
+                .attr('src', url)
+                .get(0);
+            player.play();
+        }, 250);
+    };
+    MainCtrl.prototype.GenerateUrl = function (url) {
+        return this.$sce.trustAsResourceUrl(url);
+    };
+    MainCtrl.prototype.Next = function () {
+    };
     return MainCtrl;
 })(BaseController);
-newVevo.controller("mainCtrl", ["$scope", "$http", function ($scope, $http) { return new MainCtrl($scope, $http); }]);
+newVevo.controller("mainCtrl", ["$scope", "$http", "$sce", function ($scope, $http, $sce) { return new MainCtrl($scope, $http, $sce); }]);
 //# sourceMappingURL=NewVevo.js.map

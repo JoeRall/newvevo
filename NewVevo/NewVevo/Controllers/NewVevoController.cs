@@ -5,9 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace NewVevo.Controllers
 {
+    [EnableCors("*", "*", "*")]
     public class NewVevoController : ApiController
     {
         private static readonly RandomVideoService svc;
@@ -24,13 +26,15 @@ namespace NewVevo.Controllers
         [HttpGet]
         public Video[] Next(string userId)
         {
-            var user = ctx.Users.FirstOrDefault(u => u.Id == userId);
+            var user = GetUser(userId);
 
             if (null == user)
                 return null;
 
             return svc.GetRandomVideos(user);
         }
+
+        
 
         [HttpGet]
         public List<Stream> Streams(string isrc)
@@ -41,7 +45,7 @@ namespace NewVevo.Controllers
         [HttpPost]
         public void MarkWatched(string userId, string isrc, TimeSpan duration)
         {
-            var user = ctx.Users.FirstOrDefault(u => u.Id == userId);
+            var user = GetUser(userId);
 
             var video = ctx.Videos.FirstOrDefault(v => v.Isrc == isrc);
 
@@ -55,6 +59,12 @@ namespace NewVevo.Controllers
 
             ctx.WatchHistory.Add(watched);
             ctx.SaveChanges();
+        }
+
+        private ApplicationUser GetUser(string userId)
+        {
+            var user = ctx.Users.FirstOrDefault(u => u.UserName == userId);
+            return user;
         }
     }
 }
