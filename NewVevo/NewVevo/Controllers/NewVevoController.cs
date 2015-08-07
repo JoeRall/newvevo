@@ -39,7 +39,14 @@ namespace NewVevo.Controllers
 
             response.Videos = svc.GetRandomVideos(user.User);
             response.IsNewUser = user.IsNewUser;
+
             response.WatchHistory = user.User.WatchedVideos;
+           
+            //-- We want to remove the cirucular references here for the json serializer
+            foreach (var wv in user.User.WatchedVideos)
+            {
+                wv.User = null;
+            }
             return response;
         }
 
