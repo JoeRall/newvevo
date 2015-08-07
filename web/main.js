@@ -1,3 +1,12 @@
+//TODO, handle getting next video while playback is paused
+// Output watch history to page
+
+// TODO: styles
+// constrain video to be 16:9
+// don't show video container till streams load
+// hover states on buttons
+
+
 var token = "_TMw_fGgJHvzr84MqwK1eWhBgbdebZhAm_y3W1ou-sU1.1439085600.xrqkd87wbBX66Jh0rdWF_bDvOl6CfmhH_vc1-THLJjnmOfVeGM1dK14xiHsiZTSP7-jakA2";
 
 // set up xhr and reusable request function
@@ -78,12 +87,7 @@ var getNextVideo = function(startPlay) {
   makeRequest(cb, "get", "http://apiv2.vevo.com/video/" + isrc + "/streams/mp4?token=" + token);
 }
 
-random.addEventListener('click', function (event) {
-  // some random object of videos, get next
-  // play the next video
-  // check if we need more vidoes
-  // if yes make a call to the server
-  // randomVideos.concat(getMoreVideos());
+var trackVideoWatch = function(roulette) {
   cb = function(request) {
     console.log(request)
     // if (response.error) {
@@ -93,11 +97,17 @@ random.addEventListener('click', function (event) {
   data = JSON.stringify({
     userId: currentUser,
     isrc: randomVideos[currentIndex].Isrc,
-    duration: getTimeCode(video.currentTime)
+    duration: getTimeCode(video.currentTime),
+    IsRoulette: roulette,
+    HasPressedPaused: false // TODO: hook this up
   })
   makeRequest(cb, "post", "http://newvevo.azurewebsites.net/api/newvevo/MarkWatched", data);
+}
 
+random.addEventListener('click', function (event) {
+  trackVideoWatch();
   getNextVideo(true);
+  addToWatchHistory();
 });
 
 username.addEventListener('keyup', function(event){
@@ -126,13 +136,24 @@ rouletteBtn.addEventListener('click', function(event){
   // video.src = getNextVideo();
   playPauseBtn.classList.add('disable');
   randomBtn.classList.add('disable');
+  trackVideoWatch(true);
+  getNextVideo(true);
 });
 
 video.addEventListener('ended', function(event){
+  trackVideoWatch();
+  getNextVideo(true);
   playPauseBtn.classList.remove('disable');
   randomBtn.classList.remove('disable');
 });
 
 var addToWatchHistory = function() {
-
+  var div = document.createElement('div');
+  var spanTitle = document.createElement('span');
+  var spanArtist = document.createElement('span');
+  spanTitle.innerHTML = "Title: " + randomVideos[currentIndex - 1].Title;
+  spanArtist.innerHTML = "Artist: " + randomVideos[currentIndex - 1].Artist;
+  div.appendChild(spanTitle);
+  div.appendChild(spanArtist);
+  document.getElementById('history').appendChild(div);
 }
