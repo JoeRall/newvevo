@@ -57,7 +57,7 @@ namespace NewVevo.Controllers
         {
             var byIsrc = collection.GroupBy(v => v.Video.Isrc);
 
-            return byIsrc.Select(v => v.Last()).ToList();
+            return byIsrc.Select(v => v.Last()).OrderByDescending(v => v.WatchDate).ToList();
         }
 
         public ActionResult About()
