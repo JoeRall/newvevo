@@ -20,7 +20,7 @@
             }
             else
             {
-                <h1><i class="fa fa-clock-o"></i> Watch History -- @Model.WatchHistory.Count Videos</h1>
+                <h1><i class="fa fa-clock-o"></i> Watch History -- @Model.WatchHistory.Count Videos <a href="/Stats" style="color:white"><i class="fa fa-info-circle"></i></a></h1>
                 <div id="history" class="watch-history">
                     @if (Model.WatchHistory.Count == 0)
                     {

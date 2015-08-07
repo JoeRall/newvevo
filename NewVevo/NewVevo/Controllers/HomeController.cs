@@ -24,6 +24,11 @@ namespace NewVevo.Controllers
             return View();
         }
 
+        public ActionResult Info()
+        {
+            return View();
+        }
+
         
 
         public async Task<ActionResult> History(string id)
