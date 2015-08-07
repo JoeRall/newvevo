@@ -1,5 +1,4 @@
 //TODO handle getting next video while playback is paused
-// first time click issues
 // change on any button
 
 // TODO: styles
