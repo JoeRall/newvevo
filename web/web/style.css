@@ -68,6 +68,7 @@ span {
     margin-top: 40px;
     position: relative;
     text-align: center;
+    -webkit-user-select: none;
 }
 
 .watch-history {
