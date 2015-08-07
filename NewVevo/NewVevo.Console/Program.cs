@@ -10,6 +10,19 @@ namespace NewVevo.Console
     {
         static void Main(string[] args)
         {
+            //TestRunningRandom();
+
+            var svc = new VideoService();
+            var streams = svc.GetVideoUrls("USSM21302490");
+
+            foreach (var s in streams)
+            {
+                System.Console.WriteLine("Stream: {0}", s.Url);
+            }
+        }
+
+        private static void TestRunningRandom()
+        {
             var db = new VevoContext();
 
             var svc = new RandomVideoService(db.Videos.ToList());
@@ -22,19 +35,18 @@ namespace NewVevo.Console
             {
                 var nextVid = svc.GetRandomVideo(user);
 
-                var wv = new WatchedVideo { 
+                var wv = new WatchedVideo
+                {
                     User = user,
-                    Video = nextVid, 
-                    WatchDate = DateTime.Now };
-                
+                    Video = nextVid,
+                    WatchDate = DateTime.Now
+                };
+
                 db.WatchHistory.Add(wv);
                 db.SaveChanges();
 
                 System.Console.WriteLine(nextVid);
             }
-
-
-
         }
     }
 }

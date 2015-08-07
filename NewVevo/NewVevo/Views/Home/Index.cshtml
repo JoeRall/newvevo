@@ -2,7 +2,39 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>New Vevo</h1>
-    <p class="lead">New Videos. No Ads. All Awesome.</p>
+<div ng-controller="mainCtrl" ng-cloak>
+    <div class="jumbotron">
+        <div class="new-user" ng-show="IsNewUser">
+            <h1 class="text-center">New Vevo</h1>
+            <p class="lead text-center">New Videos. No Ads. All Awesome.</p>
+
+            <p class="text-center">
+                <input id="userTB" class="text-center" placeholder="User Name" />
+            </p>
+
+        </div>
+
+        <div class="existing-user" ng-show="IsExistingUser">
+            <h1>Welcome Back {{userName}}!</h1>
+
+            <video width="320" height="240" controls>
+                <source ng-repeat="s in streams" src="s.url" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <br />
+            <i class="fa fa-3x fa-random"></i>
+        </div>
+    </div>
 </div>
+
+
+@section scripts {
+    <script type="text/javascript">
+
+        $('#userTB').keypress(function (e) {
+            if (e.which == 13) {
+                location = "/u/" + $('#userTB').val();
+            }
+        });
+    </script>
+}
