@@ -6,7 +6,7 @@
 // hover states on buttons
 
 
-var token = "_TMw_fGgJHvzr84MqwK1eWhBgbdebZhAm_y3W1ou-sU1.1439085600.xrqkd87wbBX66Jh0rdWF_bDvOl6CfmhH_vc1-THLJjnmOfVeGM1dK14xiHsiZTSP7-jakA2";
+var token = "_TMw_fGgJHvzr84MqwK1eWhBgbdebZhAm_y3W1ou-sU1.1439830800.f-MhU1MNRDGU2IxXn0LjvOByguOfXLSa5mbBrvqLx5KFfXnxQ72KR7EyyF-V-S0AQcs9Xw2";
 
 // set up xhr and reusable request function
 var ajax = function () {
